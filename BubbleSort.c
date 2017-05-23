@@ -1,5 +1,12 @@
 #include <stdio.h>
 
+void myswap(int *a, int *b)
+{
+	*a = *a + *b;
+	*b = *a - *b;
+	*a = *a - *b;
+}
+
 void printarr(int nums[], int len)
 {
 	int i = 0;
@@ -15,17 +22,14 @@ void printarr(int nums[], int len)
 void bubblesort1(int nums[], int len)
 {
 	int i = 0, j = 0, k = 0;
-	int temp = 0;
 
-	for(i=0;i<len-1;i++)
+	for(i=0;i<len;i++)
 	{
-		for(j=i+1;j<len;j++)
+		for(j=1;j<len-i;j++)
 		{
-			if(nums[i]>nums[j])
+			if(nums[j-1]>nums[j])
 			{
-				temp = nums[i];
-				nums[i] = nums[j];
-				nums[j] = temp;
+				myswap(&nums[j-1], &nums[j]);
 			}
 		}
 	}
@@ -35,18 +39,15 @@ void bubblesort2(int nums[], int len)
 {
 	int i = 0, j = 0;
 	int flag = 1;
-	int temp = 0;
 
 	while(flag)
 	{
 		flag = 0;
-		for(j=i+1;j<len;j++)
+		for(j=1;j<len-i;j++)
 		{
-			if(nums[i]>nums[j])
+			if(nums[j-1]>nums[j])
 			{
-				temp = nums[i];
-				nums[i] = nums[j];
-				nums[j] = temp;
+				myswap(&nums[j-1], &nums[j]);
 				flag = 1;
 			}
 		}
@@ -54,12 +55,22 @@ void bubblesort2(int nums[], int len)
 	}
 }
 
-void bubblesort3(int nusm[], int len)
+void bubblesort3(int nums[], int len)
 {
 	int i = 0, j = 0;
 	int flag = 0;
 
-	for
+	for(i=0;i<len;i++)
+	{
+		for(j=1;j<len-flag;j++)
+		{
+			if(nums[j-1]>nums[j])
+			{
+				myswap(&nums[j-1], &nums[j]);
+				flag = j;
+			}
+		}
+	}
 }
 
 int main()
@@ -68,7 +79,7 @@ int main()
 	int len = 0;
 
 	len = sizeof(nums) / sizeof(int);
-	bubblesort2(nums, len);
+	bubblesort3(nums, len);
 	printarr(nums, len);
 
 	return 0;
