@@ -62,7 +62,7 @@ void bubblesort3(int nums[], int len)
 
 	for(i=0;i<len;i++)
 	{
-		for(j=1;j<len-flag;j++)
+		for(j=1;j<=flag;j++)
 		{
 			if(nums[j-1]>nums[j])
 			{
